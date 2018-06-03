@@ -2,21 +2,15 @@
 
 use bemang\Session\PHPSession;
 use bemang\Session\ArraySession;
+use bemang\Session\Flash\FlashService;
 
 require_once('vendor/autoload.php');
 
-$session = new PHPSession();
-$session->set('test1', 'jkflmdqsjm');
-$session->set('test2', ['hello',' m']);
+$array = [];
+$service = new FlashService(new PHPSession());
+//$service->flash('hello', 'coucou ma biche');
+//$service->flash('hello2', 'salut ma couille');
+echo $service->get('hello');
+echo $service->get('hello');
 
 var_dump($_SESSION);
-
-$myArray = [
-    "hello" => "coucou ma biche"
-];
-
-$arraySession = new ArraySession($myArray);
-
-$arraySession->set('test1', 'hello');
-
-var_dump($myArray);
