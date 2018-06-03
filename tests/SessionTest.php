@@ -1,26 +1,84 @@
 <?php
 namespace Test;
 
+use bemang\Session\PHPSession;
 use bemang\Session\ArraySession;
 
 class SessionTest extends \PHPUnit\Framework\TestCase
 {
-    protected $sessionInstance;
-
-    public function testAllFunction()
+    public function setUp()
     {
         require_once(__DIR__ . '/../vendor/autoload.php');
+    }
+    
+    public function testArraySession()
+    {
         $array = [];
-        $this->sessionInstance = new ArraySession($array);
-        $this->sessionInstance->set('testunit', 'test');
+        $session = new ArraySession($array);
+        $session->set('testunit', 'test');
         $this->assertEquals('test', $array['testunit']);
-        $this->assertEquals('test', $this->sessionInstance->get('testunit'));
-        $this->assertTrue($this->sessionInstance->has('testunit'));
-        $this->sessionInstance->set('testunit', 'test2');
+        $this->assertEquals('test', $session->get('testunit'));
+        $this->assertTrue($session->has('testunit'));
+        $session->set('testunit', 'test2');
         $this->assertEquals('test2', $array['testunit']);
-        $this->assertEquals('test2', $this->sessionInstance->get('testunit'));
-        $this->sessionInstance->delete('testunit');
+        $this->assertEquals('test2', $session->get('testunit'));
+        $session->delete('testunit');
         $this->assertArrayNotHasKey('testunit', $array);
-        $this->assertFalse($this->sessionInstance->has(uniqid()));
+        $this->assertFalse($session->has(uniqid()));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPHPSession()
+    {
+        $session = new PHPSession();
+        $this->assertFalse($session->has('test1'));
+    }
+
+    public function testSetWithInvalidKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->expectExceptionMessage('La clé est invalide');
+        $session->set('', 'test');
+    }
+
+    public function testGetWithInvalidKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->expectExceptionMessage('La clé est invalide');
+        $session->get('', 'test');
+    }
+
+    public function testGetWithUnknowKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->assertEquals('test', $session->get('hello', 'test'));
+    }
+
+    public function testDeleteWithInvalidKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->expectExceptionMessage('La clé est invalide');
+        $session->delete('');
+    }
+
+    public function testDeleteWithUnknowKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->assertFalse($session->delete('hello'));
+    }
+
+    public function testHasWithInvalidKey()
+    {
+        $array = [];
+        $session = new ArraySession($array);
+        $this->expectExceptionMessage('La clé est invalide');
+        $session->has('');
     }
 }
