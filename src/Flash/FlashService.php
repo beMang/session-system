@@ -25,11 +25,11 @@ class FlashService
                 $flash[$name] = $message;
                 return $this->getSession()->set(self::SESSION_KEY, $flash);
             } else {
-                throw new \bemang\Session\Exception\FlashException("Le ne peut pas être vide");
+                throw new \bemang\Session\Exception\FlashException("Le ne nom du flash peut pas être vide");
                 return false;
             }
         } else {
-            throw new \bemang\Session\Exception\FlashException("Le ne peut pas être vide");
+            throw new \bemang\Session\Exception\FlashException("Le message ne peut pas être vide");
             return false;
         }
     }
