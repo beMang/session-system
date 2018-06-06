@@ -10,13 +10,15 @@ matrix:
 
 install:
   - composer install
+  - composer require twig/twig
+  - composer update
+  - composer dump -o
 
 cache:
   directories:
   - vendor
 
 script:
-  - composer dump -o
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_success:
