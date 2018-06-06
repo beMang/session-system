@@ -1,0 +1,17 @@
+{
+    "name": "bemang/session-system",
+    "description": "Librairie pour g\u0000rer les sessions php",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "suggest": {
+        "phpunit/phpunit": "^6.5",
+        "twig/twig": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "bemang\\Session\\": "src"
+        }
+    }
+}
