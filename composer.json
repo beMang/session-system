@@ -6,7 +6,8 @@
     "minimum-stability": "dev",
     "require": {},
     "suggest": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "twig/twig": "^2.4"
     },
     "autoload": {
         "psr-4": {

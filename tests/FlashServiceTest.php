@@ -4,6 +4,7 @@ namespace Test;
 
 use bemang\Session\ArraySession;
 use bemang\Session\Flash\FlashService;
+use bemang\Session\Flash\FlashTwigExtension;
 
 class FlashServiceTest extends \PHPUnit\Framework\TestCase
 {
@@ -40,5 +41,17 @@ class FlashServiceTest extends \PHPUnit\Framework\TestCase
         $flashService = new FlashService($session);
         $this->expectExceptionMessage('Le message ne peut pas être vide');
         $flashService->flash('test2', '');
+    }
+
+    public function testExtensionFlash()
+    {
+        $message = "hello ceci est un message flash";
+        $array = ["hello" => $message];
+        $session = new ArraySession($array);
+        $service = new FlashService($session);
+        $service->flash('hello', $message);
+        $extension = new FlashTwigExtension();
+        $this->assertEquals($message, $extension->getFlash($service, 'hello'));
+        $this->assertEquals($message, $extension->getFlash($service, 'hello'));
     }
 }
