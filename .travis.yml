@@ -1,16 +1,10 @@
 language: php
 
 php:
-  - 7.2.5
-  - 7.1.9
-
-matrix:
-  allow_failures:
-    - php: 7.1.9
+  - 7.4
 
 install:
   - composer install
-  - composer require twig/twig
   - composer update
   - composer dump -o
 

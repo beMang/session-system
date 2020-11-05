@@ -8,7 +8,7 @@ use bemang\Session\Flash\FlashTwigExtension;
 
 class FlashServiceTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp() :void
     {
         require(__DIR__ . '/../vendor/autoload.php');
     }

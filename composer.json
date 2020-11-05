@@ -4,10 +4,11 @@
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "twig/twig": "3.0"
+    },
     "suggest": {
-        "phpunit/phpunit": "^6.5",
-        "twig/twig": "^2.4"
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
